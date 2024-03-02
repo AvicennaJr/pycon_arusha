@@ -1,20 +1,27 @@
 from groq import Groq
 import gradio as gr
+from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+from langchain_groq import ChatGroq
 
-client = Groq(api_key="",)
+from langchain.chains import ConversationChain
 
-def chat(message):
-    chat_completion = client.chat.completions.create(
-    messages=[
-        {
-            "role": "user",
-            "content": message,
-        }
-    ],
-    model="mixtral-8x7b-32768",
+client =  ChatGroq(
+            groq_api_key="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", 
+            model_name="mixtral-8x7b-32768"
+    )
+memory=ConversationBufferWindowMemory(k=10)
+conversation = ConversationChain(
+            llm=client,
+            memory=memory
     )
 
-    return chat_completion.choices[0].message.content
+def chat(message):
+
+    bot_response = conversation(message)
+
+    memory.save_context({'input':message},{'output':bot_response['response']})
+
+    return bot_response['response']
 
 demo = gr.Interface(
     fn=chat,
