@@ -61,5 +61,6 @@ But in case that value is incorrect for you, the just open the python shell and 
 
 ![Key Value](./assets/key_value.png)
 
+Copy the value (with the brackets `<>`) and use them in the code.
 
 > For any questions and suggestions reach out to me via telegram @JustMojo
