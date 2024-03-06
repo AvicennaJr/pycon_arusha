@@ -1,4 +1,3 @@
-from groq import Groq
 import gradio as gr
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain_groq import ChatGroq
@@ -6,7 +5,7 @@ from langchain_groq import ChatGroq
 from langchain.chains import ConversationChain
 
 client =  ChatGroq(
-            groq_api_key="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", 
+            groq_api_key="your-api-key-here", 
             model_name="mixtral-8x7b-32768"
     )
 memory=ConversationBufferWindowMemory(k=10)
